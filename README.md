@@ -1,3 +1,16 @@
+# Modificación de los ficheros Configuration.h y Configuration_adv.h para funcionar con Anycubic Kossel Linear Plus con:
+#     - Extrusor Dual Drive Clon-BMG 
+#     - Pantalla REPRAP DISCOUNT FULL GRAPHIC SMART CONTROLLER
+#     - TMC2208 en X, Y, Z y E0
+#     - Placa BigtreeTech SKR 1.3
+
+# Fallos reportado por ahora:
+#     - G33 P1: No funciona, se queda la impresora como busy cuando se mana el comando y no responde a pulsar el Knob de la pantalla.
+
+
+
+
+
 # Marlin 3D Printer Firmware
 
 [![Build Status](https://travis-ci.org/MarlinFirmware/Marlin.svg?branch=bugfix-2.0.x)](https://travis-ci.org/MarlinFirmware/Marlin)
