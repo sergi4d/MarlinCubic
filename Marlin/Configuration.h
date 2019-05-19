@@ -21,20 +21,50 @@
  */
 #pragma once
 
+
 /**
- * Choose your version:
+ * Y aquí la cocina, ideada por @Correos del grupo de AnyCubic (https://t.me/anycubic).
+ * ================================================================================
+ *                                  --- COCINA ---
+ * ================================================================================
+ * Selecciona tu modelo:
  */
-// normal size or plus?
+// Pulley o Plus?, COMENTAR SI TIENES VERSION PULLEY
 #define ANYCUBIC_KOSSEL_PLUS
 
-// Anycubic Probe version 1 or 2 see README.md; 0 for no probe
+// Versión de sonda Anycubic 1 o 2, 3 Sonda de ESPONJA, 0 sin sonda
+// Ver carpeta FOTOS DE SONDAS
 #define ANYCUBIC_PROBE_VERSION 1
 
-// Heated Bed:
-// 0 ... no heated bed
-// 1 ... aluminium heated bed with "BuildTak-like" sticker
-// 2 ... ultrabase heated bed
+// CAMA CALIENTE:
+// 0 ... SIN CAMA CALIENTE
+// 1 ... CAMA CALIENTE STANDARD // con pegatina "BuildTak-ANYCUBIC"
+// 2 ... ULTRABASE
 #define ANYCUBIC_KOSSEL_ENABLE_BED 1
+
+/*DRIVERS Ejes y E0:
+*
+* Aquí indicamos que tipo de drivers tenemos para nuestros motores de los ejes XYZ y para el E0
+* en caso de tener algún motor mas habria que descomentar la linea correspondiente en el apartado: Stepper Drivers
+*
+* Posibles opciones: A4988, A5984, DRV8825, LV8729, L6470, TB6560, TB6600, TMC2100,
+*                    TMC2130, TMC2130_STANDALONE, TMC2208, TMC2208_STANDALONE,
+*                    TMC26X,  TMC26X_STANDALONE,  TMC2660, TMC2660_STANDALONE,
+*                    TMC2160, TMC2160_STANDALONE, TMC5130, TMC5130_STANDALONE,
+*                    TMC5160, TMC5160_STANDALONE
+*/
+//Drivers de los ejes X, Y, Z:
+#define AXYS_DRIVERS  TMC2208
+
+//Drivers del extrusor E0:
+#define EXTRUDER_DRIVER TMC2208
+
+
+/* ================================================================================
+ *                                FIN DEL COCINADO
+ * ================================================================================
+ */
+
 
 /**
  * Configuration.h
@@ -105,7 +135,7 @@
  */
 
 // Enable to show the bitmap in Marlin/_Bootscreen.h on startup.
-//#define SHOW_CUSTOM_BOOTSCREEN
+#define SHOW_CUSTOM_BOOTSCREEN
 
 // Enable to show the bitmap in Marlin/_Statusscreen.h on the status screen.
 //#define CUSTOM_STATUS_SCREEN_IMAGE
@@ -139,7 +169,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200
+#define BAUDRATE 250000  //115200
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -737,7 +767,12 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING false  // set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING false  // set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1) // V1 is NO, V2 is NC
+//#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1) // V1 is NO, V2 is NC
+#if ANYCUBIC_PROBE_VERSION == 2                                     // V1 is NO, V2 is NC, V3 is NO
+  #define Z_MIN_ENDSTOP_INVERTING false
+#else
+  #define Z_MIN_ENDSTOP_INVERTING true
+#endif
 #define X_MAX_ENDSTOP_INVERTING false  // set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false  // set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false  // set to true to invert the logic of the endstop.
@@ -758,14 +793,14 @@
  *          TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208
-#define Y_DRIVER_TYPE  TMC2208
-#define Z_DRIVER_TYPE  TMC2208
+#define X_DRIVER_TYPE  AXYS_DRIVERS //TMC2208
+#define Y_DRIVER_TYPE  AXYS_DRIVERS //TMC2208
+#define Z_DRIVER_TYPE  AXYS_DRIVERS //TMC2208
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE TMC2208
+#define E0_DRIVER_TYPE EXTRUDER_DRIVER //TMC2208
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -824,7 +859,7 @@
 
 // delta speeds must be the same on xyz
 #define DEFAULT_XYZ_STEPS_PER_UNIT ((XYZ_FULL_STEPS_PER_ROTATION) * (XYZ_MICROSTEPS) / double(XYZ_BELT_PITCH) / double(XYZ_PULLEY_TEETH)) // 80
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, 410.89 }  // default steps per unit for Kossel (GT2, 20 tooth)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, 406.82 }  // default steps per unit for Kossel (GT2, 20 tooth)
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1151,7 +1186,7 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-//Modificacion por los TMC2208 (estaban a true(chica la hostia contra la cama al probar con true))
+//Modificacion por los TMC2208 (estaban a true(chica la hostia contra la cama al hacer G28 con true))
 #define INVERT_X_DIR false   //true
 #define INVERT_Y_DIR false   //true
 #define INVERT_Z_DIR false   //true
