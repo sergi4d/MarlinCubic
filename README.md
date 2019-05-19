@@ -5,7 +5,7 @@
 ###     - Placa BigtreeTech SKR 1.3
 
 ## Fallos reportado por ahora:
-        - G29 P1: /* No funciona, se queda la impresora como busy cuando se mana el comando y no responde a pulsar el Knob de la pantalla.*/
+- G29 P1: No funciona, se queda la impresora como busy cuando se mana el comando y no responde a pulsar el Knob de la pantalla.
 ###     - G29 P1: Ahora si funciona, se ha quitado que pida validación para poner la sonda (OJO!! Acordarse de ponerla).
 ###               También se ha corregido a la hora de realizar la medición de la malla con G29 que no se vaya a buscar puntos fuera de la cama...
 
