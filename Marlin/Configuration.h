@@ -1187,14 +1187,26 @@
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 //Modificacion por los TMC2208 (estaban a true(chica la hostia contra la cama al hacer G28 con true))
-#define INVERT_X_DIR false   //true
-#define INVERT_Y_DIR false   //true
-#define INVERT_Z_DIR false   //true
+#if AXYS_DRIVERS == (TMC2208 || TMC2130)  //si llevamos alguno de esos 2 TMC no invertimos la direccion
+  #define INVERT_X_DIR false
+  #define INVERT_Y_DIR false
+  #define INVERT_Z_DIR false
+#elif AXYS_DRIVERS == A4988  //en caso de que llevemos los drivers stock invertimos la direccion.
+  #define INVERT_X_DIR true
+  #define INVERT_Y_DIR true
+  #define INVERT_Z_DIR true
+#endif
+
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false  //true
+#if EXTRUDER_DRIVER == (TMC2208 || TMC2130) //si llevamos alguno de esos 2 TMC no invertimos la direccion
+  #define INVERT_E0_DIR false
+#elif EXTRUDER_DRIVER == A4988 //en caso de que llevemos los drivers stock invertimos la direccion.
+  #define INVERT_E0_DIR true
+#endif
+
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
