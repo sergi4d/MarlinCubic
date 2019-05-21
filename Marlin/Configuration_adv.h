@@ -347,7 +347,12 @@
  */
 
 //El pin para E0 se encontraba deshabilitado, por lo que aunque el extrusor llegase a 200º no se activaba el ventilador.
-#define E0_AUTO_FAN_PIN P2_04 //antes: -1. El pin P2_04 es el correspondiente al puerto para E1, en caso de que no haya un extrusor conectado, actua como ventilador.
+#if PLACA_BASE == SKR
+  #define E0_AUTO_FAN_PIN P2_04 //antes: -1. El pin P2_04 es el correspondiente al puerto para E1, en caso de que no haya un extrusor conectado, actua como ventilador.
+#elif PLACA_BASE == GORILLA
+  #define E0_AUTO_FAN_PIN 44
+#endif
+
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1

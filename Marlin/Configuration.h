@@ -59,6 +59,9 @@
 //Drivers del extrusor E0:
 #define EXTRUDER_DRIVER TMC2208
 
+// Seleccionamos el tipo de placa que lleva nuestra printer.
+// Tenemos SKR o GORILLA.
+#define PLACA_BASE SKR
 
 /* ================================================================================
  *                                FIN DEL COCINADO
@@ -158,7 +161,9 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_2 -1
+#if PLACA_BASE == SKR
+  #define SERIAL_PORT_2 -1
+#endif
 
 /**
  * This setting determines the communication speed of the printer.
@@ -176,8 +181,12 @@
 
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
-#ifndef MOTHERBOARD
-  //#define MOTHERBOARD BOARD_TRIGORILLA_14
+// #define MOTHERBOARD BOARD_BIGTREE_SKR_V1_3
+#if PLACA_BASE == SKR
+  #define MOTHERBOARD BOARD_BIGTREE_SKR_V1_3
+#elif PLACA_BASE == GORILLA
+  #define MOTHERBOARD BOARD_TRIGORILLA_14
+#else
   #define MOTHERBOARD BOARD_BIGTREE_SKR_V1_3
 #endif
 
