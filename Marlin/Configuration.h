@@ -779,7 +779,7 @@
 //#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1) // V1 is NO, V2 is NC
 #if ANYCUBIC_PROBE_VERSION == 2                                     // V1 is NO, V2 is NC, V3 is NO
   #define Z_MIN_ENDSTOP_INVERTING false
-#else
+#elif ANYCUBIC_PROBE_VERSION (1 || 3)
   #define Z_MIN_ENDSTOP_INVERTING true
 #endif
 #define X_MAX_ENDSTOP_INVERTING false  // set to true to invert the logic of the endstop.
@@ -1100,8 +1100,9 @@
 #if ANYCUBIC_PROBE_VERSION == 2
   #define Z_PROBE_OFFSET_FROM_EXTRUDER -16.8  // Z offset: -below +above  [the nozzle]
 #elif ANYCUBIC_PROBE_VERSION == 1
-  //#define Z_PROBE_OFFSET_FROM_EXTRUDER -19.0  // Z offset: -below +above  [the nozzle]
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0  // Z offset para la sonda de espuma
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -19.0  // Z offset: -below +above  [the nozzle]
+#elif ANYCUBIC_PROBE_VERSION == 3
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER   0.0  // Z offset para la sonda de espuma
 #else
   #define Z_PROBE_OFFSET_FROM_EXTRUDER   0    // Z offset: -below +above  [the nozzle]
 #endif
