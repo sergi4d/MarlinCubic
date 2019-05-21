@@ -779,7 +779,7 @@
 //#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1) // V1 is NO, V2 is NC
 #if ANYCUBIC_PROBE_VERSION == 2                                     // V1 is NO, V2 is NC, V3 is NO
   #define Z_MIN_ENDSTOP_INVERTING false
-#elif ANYCUBIC_PROBE_VERSION (1 || 3)
+#elif ANYCUBIC_PROBE_VERSION == (1 || 3)
   #define Z_MIN_ENDSTOP_INVERTING true
 #endif
 #define X_MAX_ENDSTOP_INVERTING false  // set to true to invert the logic of the endstop.
