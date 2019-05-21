@@ -34,7 +34,7 @@
 
 // Versión de sonda Anycubic 1 o 2, 3 Sonda de ESPONJA, 0 sin sonda
 // Ver carpeta FOTOS DE SONDAS
-#define ANYCUBIC_PROBE_VERSION 1
+#define ANYCUBIC_PROBE_VERSION 3
 
 // CAMA CALIENTE:
 // 0 ... SIN CAMA CALIENTE
