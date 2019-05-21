@@ -1102,7 +1102,7 @@
 #elif ANYCUBIC_PROBE_VERSION == 1
   #define Z_PROBE_OFFSET_FROM_EXTRUDER -19.0  // Z offset: -below +above  [the nozzle]
 #elif ANYCUBIC_PROBE_VERSION == 3
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER   0.0  // Z offset para la sonda de espuma
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER   0  // Z offset para la sonda de espuma
 #else
   #define Z_PROBE_OFFSET_FROM_EXTRUDER   0    // Z offset: -below +above  [the nozzle]
 #endif
